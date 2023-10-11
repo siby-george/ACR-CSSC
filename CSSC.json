@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.22.6.54827",
-      "templateHash": "10794102618909698"
+      "templateHash": "17591573983990659023"
     }
   },
   "parameters": {
@@ -16,6 +16,10 @@
       "type": "string",
       "defaultValue": "[resourceGroup().location]"
     }
+  },
+  "variables": {
+    "taskContextPath": "https://github.com/siby-george/ACR-CSSC.git#Cssc-workflow",
+    "taskFilePath": "CSSCAcrTask.yaml"
   },
   "resources": [
     {
@@ -238,8 +242,9 @@
         },
         "timeout": 3600,
         "step": {
-          "type": "EncodedTask",
-          "encodedTaskContent": "dmVyc2lvbjogdjEuMS4wCnZlcnNpb246IHYxLjEuMApzdGVwczoKICAjIFRhc2sxLiBQZXJmb3JtIHRoZSB2dWxuZXJhYmlsaXR5IHNjYW4gZm9yIHRoZSBpbnB1dCBpbWFnZQogIC0gY21kOiB8CiAgICAgIGdoY3IuaW8vYXF1YXNlY3VyaXR5L3RyaXZ5IGltYWdlIFwKICAgICAge3suUnVuLlJlZ2lzdHJ5fX0ve3suVmFsdWVzLlJFUE9TSVRPUll9fTp7ey5WYWx1ZXMuVEFHfX0gXAogICAgICAtLWZvcm1hdCBzYXJpZiBcCiAgICAgIC0tb3V0cHV0IC4vdnVsbmVyYWJpbGl0eXNjYW4uc2FyaWYKICAjIFRhc2syLiA8VEJEPiBTaWduIHRoZSB2dWxuZXJhYmlsaXR5IHNjYW5uZWQgc2FyaWYgaW1hZ2UKICAjIFRhc2szLiBHZW5lcmF0ZSBTQk9NIGZvciB0aGUgaW5wdXQgaW1hZ2UgYW5kIHRhZwogIC0gY21kOiB8CiAgICAgIGdoY3IuaW8vYXF1YXNlY3VyaXR5L3RyaXZ5IGltYWdlIFwKICAgICAge3suUnVuLlJlZ2lzdHJ5fX0ve3suVmFsdWVzLlJFUE9TSVRPUll9fTp7ey5WYWx1ZXMuVEFHfX0gXAogICAgICAtLWZvcm1hdCBzcGR4IFwKICAgICAgLS1vdXRwdXQgLi9zYm9tLnNwZHgKICAjIFRhc2s0LiA8VEJEPiBTaWduIHRoZSBnZW5lcmF0ZWQgU0JPTSBzcGR4IGZpbGUKICAjIFRhc2s1LiBQdXNoIHRoZSBhcnRpZmFjdHMgdG8gdGhlIHJlZ2lzdHJ5IGFzIE9DSS1yZWZlcnJlcnMKICAtIGNtZDogfAogICAgICBnaGNyLmlvL29yYXMtcHJvamVjdC9vcmFzOnYxLjEuMCBhdHRhY2ggXAogICAgICAtLWFydGlmYWN0LXR5cGUgdnVsbmVyYWJpbGl0eVNjYW5SZXN1bHQvZXhhbXBsZSBcCiAgICAgIHt7LlJ1bi5SZWdpc3RyeX19L3t7LlZhbHVlcy5SRVBPU0lUT1JZfX06e3suVmFsdWVzLlRBR319IFwKICAgICAgLi92dWxuZXJhYmlsaXR5c2Nhbi5zYXJpZgogICMgVGFzazYuIFB1c2ggdGhlIGFydGlmYWN0cyB0byB0aGUgcmVnaXN0cnkgYXMgT0NJLXJlZmVycmVycwogIC0gY21kOiB8CiAgICAgIGdoY3IuaW8vb3Jhcy1wcm9qZWN0L29yYXM6djEuMS4wIGF0dGFjaCBcCiAgICAgIC0tYXJ0aWZhY3QtdHlwZSBTQk9NL2V4YW1wbGUgXAogICAgICB7ey5SdW4uUmVnaXN0cnl9fS97ey5WYWx1ZXMuUkVQT1NJVE9SWX19Ont7LlZhbHVlcy5UQUd9fSBcCiAgICAgIC4vc2JvbS5zcGR4"
+          "type": "FileTask",
+          "contextPath": "[variables('taskContextPath')]",
+          "taskFilePath": "[variables('taskFilePath')]"
         },
         "isSystemTask": false
       }
