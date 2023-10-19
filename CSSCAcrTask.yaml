@@ -1,0 +1,28 @@
+version: v1.1.0
+steps:
+  # Task1. Perform the vulnerability scan for the input image
+  - cmd: |
+      ghcr.io/aquasecurity/trivy image \
+      {{.Run.Registry}}/{{.Values.REPOSITORY}}:{{.Values.TAG}} \
+      --format sarif \
+      --output ./vulnerabilityscan.sarif
+  # Task2. <TBD> Sign the vulnerability scanned sarif image
+  # Task3. Generate SBOM for the input image and tag
+  - cmd: |
+      ghcr.io/aquasecurity/trivy image \
+      {{.Run.Registry}}/{{.Values.REPOSITORY}}:{{.Values.TAG}} \
+      --format spdx \
+      --output ./sbom.spdx
+  # Task4. <TBD> Sign the generated SBOM spdx file
+  # Task5. Push the artifacts to the registry as OCI-referrers
+  - cmd: |
+      ghcr.io/oras-project/oras:v1.1.0 attach \
+      --artifact-type vulnerabilityScanResult/example \
+      {{.Run.Registry}}/{{.Values.REPOSITORY}}:{{.Values.TAG}} \
+      ./vulnerabilityscan.sarif
+  # Task6. Push the artifacts to the registry as OCI-referrers
+  - cmd: |
+      ghcr.io/oras-project/oras:v1.1.0 attach \
+      --artifact-type SBOM/example \
+      {{.Run.Registry}}/{{.Values.REPOSITORY}}:{{.Values.TAG}} \
+      ./sbom.spdx
