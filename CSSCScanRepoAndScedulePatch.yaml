@@ -26,4 +26,5 @@ steps:
         done < tags.txt; \
         if [[ "$previous_line" != *"-patched" ]]; then \
         echo "$previous_line-->$previous_line"; \
+        az acr task run --name $ScanAndSchedulePatchTask --registry $RegistryName --set SOURCE_REPOSITORY={{.Values.SOURCE_REPOSITORY}} --set SOURCE_IMAGE_TAG=$previous_line --set SOURCE_IMAGE_ORIGINAL_TAG=$previous_line --no-wait; \
         fi;'

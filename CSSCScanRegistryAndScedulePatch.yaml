@@ -8,7 +8,7 @@ steps:
   - cmd: mcr.microsoft.com/azure-cli az acr repository list -n $RegistryName > repos.json
   - cmd: mcr.microsoft.com/azure-cli jq -r .[] repos.json > repos.txt
   - cmd: |
-        mcr.microsoft.com/azure-cli bash -c while read line;do \
+        mcr.microsoft.com/azure-cli bash -c 'while read line;do \
         echo "Processing repo $line"; \
-        az acr task run --name $ScanRepoAndSchedulePatchTask --registry $RegistryName --set SOURCE_REPOSITORY=$line 
+        az acr task run --name $ScanRepoAndSchedulePatchTask --registry $RegistryName --set SOURCE_REPOSITORY=$line --no-wait; \
         done < repos.txt;'
