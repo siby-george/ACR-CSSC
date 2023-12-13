@@ -1,0 +1,14 @@
+version: v1.1.0
+alias:
+  values:
+    ScanRepoAndSchedulePatchTask: CSSC-ScanRepoAndSchedulePatch
+steps:
+  - cmd: bash -c 'echo "Scaning Repo {{.Values.SOURCE_REPOSITORY}}"'
+  - cmd: az login --identity
+  - cmd: mcr.microsoft.com/azure-cli az acr repository list -n $RegistryName > repos.json
+  - cmd: mcr.microsoft.com/azure-cli jq -r .[] repos.json > repos.txt
+  - cmd: |
+        mcr.microsoft.com/azure-cli bash -c while read line;do \
+        echo "Processing repo $line"; \
+        az acr task run --name $ScanRepoAndSchedulePatchTask --registry $RegistryName --set SOURCE_REPOSITORY=$line 
+        done < repos.txt;'
